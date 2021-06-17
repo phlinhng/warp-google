@@ -38,3 +38,13 @@ for googip in `cat /tmp/goog_ips`; do echo "AllowedIPs = $googip" >> /etc/wiregu
 ```
 ## 3. 启动 WireGuard
 就是这么简单。
+## 4. (可选) 禁用 IPv6 DNS 结果
+为了避免 DNS 有时默名奇妙返回 AAAA 纪录造成连接失败，建议禁止系统使用 IPv6 结果
+```
+echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
+```
+## 5. 补充
+如果你除了上谷歌还想看 Neflix，可以有几种做法
+1. 比照本文方法，将 Netflix 的 IPv4 段加入 AllowedIP
+2. 比照本文方法，将 Netflix 的 IPv6 段加入 AllowedIP，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6
+3. 把 `AllowedIPs = ::/0` 加回来
