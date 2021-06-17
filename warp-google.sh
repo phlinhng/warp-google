@@ -3,7 +3,7 @@
 # change to your own value
 gateway="10.0.10.1"
 interface="eth0"
-mainip="10.0.10.164:
+mainip="10.0.10.164"
 
 # https://support.google.com/a/answer/10026322?hl=en
 # https://www.wireguard.com/netns/
