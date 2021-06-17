@@ -39,7 +39,7 @@ for googip in `cat /tmp/goog_ips`; do echo "AllowedIPs = $googip" >> /etc/wiregu
 ## 3. 启动 WireGuard
 就是这么简单。
 ## 4. (可选) 禁用 IPv6 DNS 结果
-为了避免 DNS 有时默名奇妙返回 AAAA 纪录造成连接失败，建议禁止系统使用 IPv6 结果
+为了避免 DNS 有时默名其妙返回 AAAA 纪录造成连接失败，建议禁止系统使用 IPv6 结果
 ```
 echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
 ```
