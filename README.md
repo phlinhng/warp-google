@@ -1,7 +1,7 @@
 # warp-google
 既然只想用 Warp 上 Google，为什么不只让 Warp 上 Google 呢？
 
-## 前置要求
+## 0. 前置要求
 1. `apt install jq`
 2. WireGuard & wgcf 
 
