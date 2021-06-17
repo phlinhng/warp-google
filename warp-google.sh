@@ -9,7 +9,7 @@ mainip="10.0.10.164"
 # https://www.wireguard.com/netns/
 
 # override the default route
-echo "ip rule add from $mainip table main" > /root/wg-down.sh
+echo "ip rule add from $mainip table main" > /root/wg-up.sh
 echo "ip route add 0.0.0.0/1 dev wgcf" >> /root/wg-up.sh
 echo "ip route add 128.0.0.0/1 dev wgcf" >> /root/wg-up.sh
 
