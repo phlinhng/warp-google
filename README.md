@@ -44,7 +44,8 @@ for googip in `cat /tmp/goog_ips`; do echo "AllowedIPs = $googip" >> /etc/wiregu
 echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
 ```
 ## 5. 补充
-如果你除了上谷歌还想看 Neflix，可以有几种做法
+如果你除了上谷歌还想看 Neflix，有几种做法
 1. 比照本文方法，将 Netflix 的 IPv4 段加入 AllowedIP
 2. 比照本文方法，将 Netflix 的 IPv6 段加入 AllowedIP，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6
-3. 把 `AllowedIPs = ::/0` 加回来，让 WireGuard 接管 谷歌的 IPv4 和 全球的 IPv6，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6。由于有些网站的 IPv6 部署情形不佳，有时即使拿到 AAAA 也连不上目标，建议不要冒然使用全局 IPv6 优先的策略。
+3. 把 `AllowedIPs = ::/0` 加回来，让 WireGuard 接管 谷歌的 IPv4 和 全球的 IPv6，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6。
+4. （不建议）把 `AllowedIPs = ::/0` 加回来，让 WireGuard 接管 谷歌的 IPv4 和 全球的 IPv6，并设置 DNS 优先使用 IPv6 结果。由于有些网站的 IPv6 部署情形不佳，有时即使拿到 AAAA 也连不上目标，不建议冒然使用全局 IPv6 优先的策略。
