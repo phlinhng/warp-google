@@ -49,3 +49,22 @@ echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
 2. 比照本文方法，将 Netflix 的 IPv6 段加入 AllowedIP，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6
 3. 把 `AllowedIPs = ::/0` 加回来，让 WireGuard 接管 谷歌的 IPv4 和 全球的 IPv6，并通过 V2Ray / Xray 的 routing 指定 `geosite:netfllix` 使用 IPv6。
 4. （不建议）把 `AllowedIPs = ::/0` 加回来，让 WireGuard 接管 谷歌的 IPv4 和 全球的 IPv6，并设置 DNS 优先使用 IPv6 结果。由于有些网站的 IPv6 部署情形不佳，有时即使拿到 AAAA 也连不上目标，不建议冒然使用全局 IPv6 优先的策略。
+
+## 6. (可选) 获取 Cloudflare IP 段
++ IPv4 Only
+```sh
+curl -s https://www.cloudflare.com/ips-v4 -o /tmp/cf_ips
+```
++ IPv6 Only
+```sh
+curl -s https://www.cloudflare.com/ips-v6 -o /tmp/cf_ips
+```
++ IPv4 & IPv6
+```sh
+curl -s https://www.cloudflare.com/ips-v4 -o /tmp/cf_ips
+curl -s https://www.cloudflare.com/ips-v6 >> /tmp/cf_ips
+```
+## 2. 将获取的 Cloudflare IP 段加入配置文件中
+```
+for cfip in `cat /tmp/cf_ips`; do echo "AllowedIPs = $cfip" >> /etc/wireguard/wgcf.conf; done
+```
