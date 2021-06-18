@@ -32,7 +32,7 @@ curl -s https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv6
 curl -s https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r > /tmp/goog_ips
 curl -s https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv6Prefix | select( . != null )" -r >> /tmp/goog_ips
 ```
-## 2. 将获取的 Google IP 段加入配置文件中
+### 将获取的 Google IP 段加入配置文件中
 ```
 for googip in `cat /tmp/goog_ips`; do echo "AllowedIPs = $googip" >> /etc/wireguard/wgcf.conf; done
 ```
@@ -64,7 +64,7 @@ curl -s https://www.cloudflare.com/ips-v6 -o /tmp/cf_ips
 curl -s https://www.cloudflare.com/ips-v4 -o /tmp/cf_ips
 curl -s https://www.cloudflare.com/ips-v6 >> /tmp/cf_ips
 ```
-## 2. 将获取的 Cloudflare IP 段加入配置文件中
+### 将获取的 Cloudflare IP 段加入配置文件中
 ```
 for cfip in `cat /tmp/cf_ips`; do echo "AllowedIPs = $cfip" >> /etc/wireguard/wgcf.conf; done
 ```
