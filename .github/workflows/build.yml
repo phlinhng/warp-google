@@ -7,7 +7,7 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    name: Fetch leatest releases
+    name: Fetch google ip ranges
     steps:
       - uses: actions/checkout@v2
         with:
@@ -15,8 +15,8 @@ jobs:
           fetch-depth: 0
       - name: Get google's ip ranges
         run: |
-          curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r >> ./google-v4.txt
-          curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r >> ./google-v6.txt
+          curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r > ./google-v4.txt
+          curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r > ./google-v6.txt
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
