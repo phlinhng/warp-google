@@ -20,8 +20,8 @@ PostDown = ip rule del from 主网口IP table main
 这就是你的配置文件模版了，接下来我们只要下载 Google 的 IP 段加到配置文件中即可。 PostUp 和 PostDown 是为了让你的入站 IP 不被 WireGuard 接管，一定要加。
 ## 2. 获取 Google IP 段
 ```sh
-curl -s https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r >> /tmp/goog_ips
-#curl -s https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv6Prefix | select( . != null )" -r >> /tmp/goog_ips
+curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv4Prefix | select( . != null )" -r >> /tmp/goog_ips
+#curl -sL https://www.gstatic.com/ipranges/goog.json | jq ".prefixes | .[] | .ipv6Prefix | select( . != null )" -r >> /tmp/goog_ips
 ```
 ### 将获取的 Google IP 段加入配置文件中
 ```
@@ -44,10 +44,20 @@ echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
 ## 6. (可选) 其他 IP 段
 ### Cloudflare
 ```sh
-curl -s https://www.cloudflare.com/ips-v4 >> /tmp/cf_ips
-#curl -s https://www.cloudflare.com/ips-v6 >> /tmp/cf_ips
+curl -sL https://www.cloudflare.com/ips-v4 >> /tmp/cf_ips
+#curl -sL https://www.cloudflare.com/ips-v6 >> /tmp/cf_ips
 for cfip in `cat /tmp/cf_ips`; do echo "AllowedIPs = $cfip" >> /etc/wireguard/wgcf.conf; done
 ```
 ### Telegram*
+```sh
+curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as62041-v4.txt >> /tmp/tg_ips
+#curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as62041-v6.txt >> /tmp/tg_ips
+for tgip in `cat /tmp/tg_ips`; do echo "AllowedIPs = $tgip" >> /etc/wireguard/wgcf.conf; done
+```
 ### Netflix*
-### *: 非官方列表，可能存在误差
+*: 非官方列表，可能存在误差
+```sh
+curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-v4.txt >> /tmp/nf_ips
+#curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-v6.txt >> /tmp/nf_ips
+for nfip in `cat /tmp/nf_ips`; do echo "AllowedIPs = $nfip" >> /etc/wireguard/wgcf.conf; done
+```
