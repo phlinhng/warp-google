@@ -57,3 +57,9 @@ curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-
 #curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-v6.txt >> /tmp/nf_ips
 for nfip in `cat /tmp/nf_ips`; do echo "AllowedIPs = $nfip" >> /etc/wireguard/wgcf.conf; done
 ```
+### 所有公网 IPv4
+由于 Wireguard 不支持排除特定 IP 段，若需要让所有公网连接走 Warp 并排除所有私网连接，可使用此列表
+```sh
+curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/public-v4.txt >> /tmp/public_ips
+for pubip in `cat /tmp/public_ips`; do echo "AllowedIPs = $pubip" >> /etc/wireguard/wgcf.conf; done
+```
