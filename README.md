@@ -45,13 +45,14 @@ curl -sL https://www.cloudflare.com/ips-v4 >> /tmp/cf_ips
 for cfip in `cat /tmp/cf_ips`; do echo "AllowedIPs = $cfip" >> /etc/wireguard/wgcf.conf; done
 ```
 ### Telegram*
+\*: 非官方列表，可能存在误差
 ```sh
 curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as62041-v4.txt >> /tmp/tg_ips
 #curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as62041-v6.txt >> /tmp/tg_ips
 for tgip in `cat /tmp/tg_ips`; do echo "AllowedIPs = $tgip" >> /etc/wireguard/wgcf.conf; done
 ```
 ### Netflix*
-*: 非官方列表，可能存在误差
+\*: 非官方列表，可能存在误差
 ```sh
 curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-v4.txt >> /tmp/nf_ips
 #curl -sL https://raw.githubusercontent.com/phlinhng/warp-google/main/ip/as55095-v6.txt >> /tmp/nf_ips
